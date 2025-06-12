@@ -18,6 +18,7 @@ import java.util.NoSuchElementException;
 public class AdminService {
 
 	private final AdminRepository adminRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	public ReadAdminInfoResponse readInfo(String adminEmail) {
 		Admin admin = adminRepository.findByAdminEmail(adminEmail).orElseThrow();
@@ -26,5 +27,14 @@ public class AdminService {
 				.username(admin.getAdminName())
 				.phoneNumber(admin.getPhoneNumber())
 				.build();
+	}
+
+	public void updateInfo(String adminEmail, UpdateAdminInfoRequest updateAdminInfoRequest) {
+		Admin admin = adminRepository.findByAdminEmail(adminEmail).orElseThrow();
+		if (passwordEncoder.matches(admin.getPassword(), updateAdminInfoRequest.getPassword())) {
+			admin.updateInfo(adminEmail, updateAdminInfoRequest);
+		}
+		// exception 일괄 처리
+		throw new NoSuchElementException();
 	}
 }

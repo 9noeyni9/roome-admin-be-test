@@ -23,4 +23,10 @@ public class AdminController {
 		ReadAdminInfoResponse readAdminInfo = adminService.readInfo(userDetails.getUsername());
 		return ResponseEntity.ok().body(readAdminInfo);
 	}
+
+	@PatchMapping
+	public ResponseEntity<Void> updateInfo(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated UpdateAdminInfoRequest updateAdminInfoRequest) {
+		adminService.updateInfo(userDetails.getUsername(), updateAdminInfoRequest);
+		return ResponseEntity.ok().build();
+	}
 }
