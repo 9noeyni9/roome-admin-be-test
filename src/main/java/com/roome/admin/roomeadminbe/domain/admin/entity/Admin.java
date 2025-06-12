@@ -1,5 +1,6 @@
 package com.roome.admin.roomeadminbe.domain.admin.entity;
 
+import com.roome.admin.roomeadminbe.domain.admin.dto.request.UpdateAdminInfoRequest;
 import com.roome.admin.roomeadminbe.domain.common.entity.Timestamped;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,8 +25,30 @@ public class Admin extends Timestamped {
 	private String adminName;
 	private String adminEmail;
 	private String password;
+	private String phoneNumber;
+	@Enumerated(EnumType.STRING)
+	private ActivationStatus activationStatus;
 	private LocalDateTime deletedAt;
-	private Boolean isdeletedAt;
+	private Boolean isDeletedAt;
+	@Enumerated(EnumType.STRING)
 	private Status status;
 	private LocalDateTime lastLoginAt;
+
+	public boolean isActivated() {
+		return this.activationStatus == ActivationStatus.ACTIVE;
+	}
+
+	public void updateTempPassword(String password) {
+		this.password = password;
+	}
+
+	public void updateInfo(String adminEmail, UpdateAdminInfoRequest updateAdminInfoRequest) {
+		this.adminName = updateAdminInfoRequest.getUsername();
+		this.phoneNumber = updateAdminInfoRequest.getPhoneNumber();
+	}
+
+	public void updatePassword(String adminEmail, String encryptedNewPassword) {
+		this.password = encryptedNewPassword;
+	}
+
 }

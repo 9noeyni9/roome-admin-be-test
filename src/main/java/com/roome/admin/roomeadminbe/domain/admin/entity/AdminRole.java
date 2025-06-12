@@ -6,5 +6,9 @@ public enum AdminRole {
 	BEFORE_OPERATION_MANAGER,
 	OPERATION_MANAGER,
 	SYSTEM_MANAGER,
-	BEFORE_SYSTEM_MANAGER
+	BEFORE_SYSTEM_MANAGER;
+
+	public String getRoleName() {
+		return "ROLE_" + this.name();
+	}
 }
