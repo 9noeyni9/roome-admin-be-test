@@ -33,4 +33,27 @@ public class AuthController {
 		authService.sendTempPassword(sendTempPasswordRequest);
 		return ResponseEntity.ok().build();
 	}
+
+	// 로그인
+	@PostMapping("/login")
+	public ResponseEntity<TokenResponseDto> authorize(@RequestBody @Validated LoginRequest loginRequestDto, HttpServletResponse response) {
+		TokenResponseDto tokenResponseDto = authService.login(loginRequestDto);
+
+		// accessToken -> header
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + tokenResponseDto.getAccessToken());
+
+		// refreshToken -> HttpOnly 쿠키
+		ResponseCookie refreshCookie = ResponseCookie.from("refreshToken", tokenResponseDto.getRefreshToken())
+				.httpOnly(true)
+				.secure(true)
+				.path("/")
+				.maxAge(Duration.ofDays(14))
+				.sameSite("Strict")
+				.build();
+		response.setHeader("Set-Cookie", refreshCookie.toString());
+
+		return new ResponseEntity<>(tokenResponseDto, httpHeaders, HttpStatus.OK);
+	}
+
 }

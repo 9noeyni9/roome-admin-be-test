@@ -44,6 +44,18 @@ public class AuthService {
 		mailService.sendTempPasswordEmail(admin.getAdminEmail(), tempPassword);
 	}
 
+	public TokenResponseDto login(LoginRequest loginRequestDto) {
+		UsernamePasswordAuthenticationToken authenticationToken =
+				new UsernamePasswordAuthenticationToken(loginRequestDto.getUsername(), loginRequestDto.getPassword());
+
+		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+		SecurityContextHolder.getContext().setAuthentication(authentication);
+		String accessToken = tokenProvider.createAccessToken(authentication);
+		String refreshToken = tokenProvider.createRefreshToken(authentication);
+
+		return new TokenResponseDto(accessToken, refreshToken);
+	}
+
 	// 랜덤 비밀번호 생성 로직
 	private String generateRandomPassword() {
 		int length = 10;
