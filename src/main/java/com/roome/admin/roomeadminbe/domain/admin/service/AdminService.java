@@ -37,4 +37,16 @@ public class AdminService {
 		// exception 일괄 처리
 		throw new NoSuchElementException();
 	}
+
+	public void updatePassword(String adminEmail, UpdatePasswordRequest updatePasswordRequest) {
+		Admin admin = adminRepository.findByAdminEmail(adminEmail).orElseThrow();
+		if (!updatePasswordRequest.getConfirmPassword().equals(updatePasswordRequest.getNewPassword())) {
+			throw new NoSuchElementException();
+		}
+		if (passwordEncoder.matches(admin.getPassword(), updatePasswordRequest.getBeforePassword())) {
+			admin.updatePassword(adminEmail, passwordEncoder.encode(updatePasswordRequest.getNewPassword()));
+		}
+		// exception 일괄 처리 예정
+		throw new NoSuchElementException();
+	}
 }

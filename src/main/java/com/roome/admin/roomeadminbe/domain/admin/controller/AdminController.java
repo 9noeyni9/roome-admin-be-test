@@ -29,4 +29,10 @@ public class AdminController {
 		adminService.updateInfo(userDetails.getUsername(), updateAdminInfoRequest);
 		return ResponseEntity.ok().build();
 	}
+
+	@PutMapping("/password")
+	public ResponseEntity<Void> updatePassword(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated UpdatePasswordRequest updatePasswordRequest) {
+		adminService.updatePassword(userDetails.getUsername(), updatePasswordRequest);
+		return ResponseEntity.ok().build();
+	}
 }
