@@ -48,4 +48,9 @@ public class SuperAdminService {
 
 		return AdminListResponse.from(page);
 	}
+
+	public void deleteAdminRole(Long adminId) {
+		Admin admin = adminRepository.findById(adminId).orElseThrow();
+		admin.deleteAdminRole();
+	}
 }

@@ -52,4 +52,9 @@ public class Admin extends Timestamped {
 		this.password = encryptedNewPassword;
 	}
 
+	public void deleteAdminRole() {
+		this.activationStatus = ActivationStatus.PENDING;
+		this.deletedAt = LocalDateTime.now();
+		this.isDeletedAt = Boolean.TRUE;
+	}
 }
