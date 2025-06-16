@@ -38,6 +38,9 @@ out/
 
 ### application.yml ###
 **/resources/application.yml
+**/resources/application-dev.yml
+**/resources/application-local.yml
+**/resources/application-prod.yml
 
 ### .env ###
 **/.env
