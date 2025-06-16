@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class AdminListRequest extends ListRequest {
 
-	private AdminRole role; // Optional: 역할별 필터링 조건
+	private AdminRole role;
 
 	// enum 파라미터를 문자열로 받을 경우 바인딩 오류 방지
 	public void setRole(String role) {

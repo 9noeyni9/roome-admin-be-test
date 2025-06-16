@@ -64,20 +64,6 @@ public class AuthService {
 		return new TokenResponseDto(accessToken, refreshToken);
 	}
 
-	// 랜덤 비밀번호 생성 로직
-	private String generateRandomPassword() {
-		int length = 10;
-		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
-		StringBuilder sb = new StringBuilder();
-		SecureRandom random = new SecureRandom();
-
-		for (int i = 0; i < length; i++) {
-			int idx = random.nextInt(chars.length());
-			sb.append(chars.charAt(idx));
-		}
-		return sb.toString();
-	}
-
 	public void logout(HttpServletRequest request, HttpServletResponse response) {
 		// 1. AccessToken 추출
 		String accessToken = tokenProvider.resolveToken(request);
@@ -93,5 +79,19 @@ public class AuthService {
 
 		// 4. 쿠키에서 RefreshToken 제거 (Set-Cookie: Max-Age=0)
 		deleteRefreshTokenCookie(response);
+	}
+
+	// 랜덤 비밀번호 생성 로직
+	private String generateRandomPassword() {
+		int length = 10;
+		String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%";
+		StringBuilder sb = new StringBuilder();
+		SecureRandom random = new SecureRandom();
+
+		for (int i = 0; i < length; i++) {
+			int idx = random.nextInt(chars.length());
+			sb.append(chars.charAt(idx));
+		}
+		return sb.toString();
 	}
 }

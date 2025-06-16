@@ -21,6 +21,7 @@ public class Admin extends Timestamped {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long adminId;
+	@Enumerated(EnumType.STRING)
 	private AdminRole adminRole;
 	private String adminName;
 	private String adminEmail;

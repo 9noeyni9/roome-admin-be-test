@@ -8,5 +8,8 @@ import java.util.Optional;
 
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, Long>, AdminRepositoryCustom {
-	Optional<Admin> findByAdminEmail(String adminEmail);
+    Optional<Admin> findByAdminEmail(String adminEmail);
+
+    // super admin 생성에 필요
+    boolean existsByAdminEmail(String email);
 }
