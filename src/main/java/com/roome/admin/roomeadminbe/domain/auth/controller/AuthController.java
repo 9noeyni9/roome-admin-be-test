@@ -30,7 +30,7 @@ public class AuthController {
 
     private final AuthService authService;
 
-    // 임시 password 발급 (첫 로그인)
+    // 임시 password 발급 요청 (첫 로그인)
     @PostMapping("/password")
     public ResponseEntity<CommonResponse<String>> sendTempPassword(@RequestBody SendTempPasswordRequest sendTempPasswordRequest) {
         authService.sendTempPassword(sendTempPasswordRequest);
