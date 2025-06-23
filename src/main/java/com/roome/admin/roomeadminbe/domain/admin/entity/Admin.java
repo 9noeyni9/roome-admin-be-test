@@ -55,7 +55,7 @@ public class Admin extends Timestamped {
 	}
 
 	public void deleteAdminRole() {
-		this.activationStatus = ActivationStatus.PENDING;
+		this.activationStatus = ActivationStatus.INACTIVE;
 		this.deletedAt = LocalDateTime.now();
 		this.isDeletedAt = Boolean.TRUE;
 	}
