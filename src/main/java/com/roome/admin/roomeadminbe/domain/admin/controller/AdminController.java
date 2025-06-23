@@ -1,10 +1,15 @@
 package com.roome.admin.roomeadminbe.domain.admin.controller;
 
+import static com.roome.admin.roomeadminbe.domain.common.dto.response.CommonResponse.ofDataWithHttpStatus;
+
+import com.roome.admin.roomeadminbe.domain.common.dto.response.CommonResponse;
 import com.roome.admin.roomeadminbe.domain.admin.dto.request.UpdateAdminInfoRequest;
 import com.roome.admin.roomeadminbe.domain.admin.dto.request.UpdatePasswordRequest;
 import com.roome.admin.roomeadminbe.domain.admin.dto.response.ReadAdminInfoResponse;
 import com.roome.admin.roomeadminbe.domain.admin.service.AdminService;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,20 +24,20 @@ public class AdminController {
 	private final AdminService adminService;
 
 	@GetMapping
-	public ResponseEntity<ReadAdminInfoResponse> readInfo(@AuthenticationPrincipal UserDetails userDetails) {
+	public ResponseEntity<CommonResponse<ReadAdminInfoResponse>> readInfo(@AuthenticationPrincipal UserDetails userDetails) {
 		ReadAdminInfoResponse readAdminInfo = adminService.readInfo(userDetails.getUsername());
-		return ResponseEntity.ok().body(readAdminInfo);
-	}
+		return ofDataWithHttpStatus(readAdminInfo, HttpStatus.OK);
+	}	
 
 	@PatchMapping
-	public ResponseEntity<Void> updateInfo(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated UpdateAdminInfoRequest updateAdminInfoRequest) {
+	public ResponseEntity<CommonResponse<String>> updateInfo(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated UpdateAdminInfoRequest updateAdminInfoRequest) {
 		adminService.updateInfo(userDetails.getUsername(), updateAdminInfoRequest);
-		return ResponseEntity.ok().build();
+		return ofDataWithHttpStatus("사용자 정보 변경 완료", HttpStatus.OK);
 	}
 
 	@PutMapping("/password")
-	public ResponseEntity<Void> updatePassword(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated UpdatePasswordRequest updatePasswordRequest) {
+	public ResponseEntity<CommonResponse<String>> updatePassword(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated UpdatePasswordRequest updatePasswordRequest) {
 		adminService.updatePassword(userDetails.getUsername(), updatePasswordRequest);
-		return ResponseEntity.ok().build();
+		return ofDataWithHttpStatus("비밀번호 변경 완료", HttpStatus.OK);
 	}
 }
