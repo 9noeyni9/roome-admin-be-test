@@ -1,4 +1,4 @@
-package com.roome.admin.roomeadminbe.domain.common.entity;
+package com.roome.admin.roomeadminbe.global.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;

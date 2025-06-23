@@ -1,7 +1,8 @@
 package com.roome.admin.roomeadminbe.domain.admin.entity;
 
 import com.roome.admin.roomeadminbe.domain.admin.dto.request.UpdateAdminInfoRequest;
-import com.roome.admin.roomeadminbe.domain.common.entity.Timestamped;
+import com.roome.admin.roomeadminbe.global.entity.Timestamped;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
