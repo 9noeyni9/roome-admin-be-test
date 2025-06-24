@@ -1,12 +1,9 @@
 package com.roome.admin.roomeadminbe.domain.auth.controller;
 
-import static com.roome.admin.roomeadminbe.domain.common.dto.response.CommonResponse.ofDataWithHttpStatus;
-
-import com.roome.admin.roomeadminbe.domain.common.dto.response.CommonResponse;
 import com.roome.admin.roomeadminbe.domain.auth.dto.TokenResponseDto;
 import com.roome.admin.roomeadminbe.domain.auth.dto.request.LoginRequest;
-import com.roome.admin.roomeadminbe.domain.auth.dto.request.SendTempPasswordRequest;
 import com.roome.admin.roomeadminbe.domain.auth.service.AuthService;
+import com.roome.admin.roomeadminbe.domain.common.dto.response.CommonResponse;
 import com.roome.admin.roomeadminbe.global.security.jwt.filter.JwtFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,19 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Duration;
 
+import static com.roome.admin.roomeadminbe.domain.common.dto.response.CommonResponse.ofDataWithHttpStatus;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/admin/auth")
 public class AuthController {
 
     private final AuthService authService;
-
-    // 임시 password 발급 요청
-//    @PostMapping("/password")
-//    public ResponseEntity<CommonResponse<String>> sendTempPassword(@RequestBody SendTempPasswordRequest sendTempPasswordRequest) {
-//        authService.sendTempPassword(sendTempPasswordRequest);
-//        return ofDataWithHttpStatus("임시 비밀번호 발급 완료", HttpStatus.OK);
-//    }
 
     // 로그인
     @PostMapping("/login")
