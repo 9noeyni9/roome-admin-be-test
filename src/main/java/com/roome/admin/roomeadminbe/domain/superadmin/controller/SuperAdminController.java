@@ -2,11 +2,13 @@ package com.roome.admin.roomeadminbe.domain.superadmin.controller;
 
 import static com.roome.admin.roomeadminbe.domain.common.dto.response.CommonResponse.ofDataWithHttpStatus;
 
+import com.roome.admin.roomeadminbe.domain.auth.service.AuthService;
 import com.roome.admin.roomeadminbe.domain.common.dto.response.CommonResponse;
 import com.roome.admin.roomeadminbe.domain.admin.dto.request.AdminListRequest;
 import com.roome.admin.roomeadminbe.domain.admin.dto.response.AdminListResponse;
 import com.roome.admin.roomeadminbe.domain.superadmin.dto.request.InviteAdminRequest;
 import com.roome.admin.roomeadminbe.domain.superadmin.service.SuperAdminService;
+import com.roome.admin.roomeadminbe.global.mail.MailService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.HttpStatus;
