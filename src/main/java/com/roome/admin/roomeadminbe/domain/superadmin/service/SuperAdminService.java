@@ -36,9 +36,7 @@ public class SuperAdminService {
 				.adminName(inviteAdminRequestDto.getAdminName())
 				.adminEmail(inviteAdminRequestDto.getAdminEmail())
 				.phoneNumber(inviteAdminRequestDto.getPhoneNumber())
-				// 관리자 인증 전
 				.activationStatus(ActivationStatus.INACTIVE)
-				// 최초 가입 전 비밀번호 null
 				.password(passwordEncoder.encode(tempPassword))
 				.deletedAt(null)
 				.isDeletedAt(false)
