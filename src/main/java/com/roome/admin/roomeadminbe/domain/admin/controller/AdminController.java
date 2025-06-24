@@ -38,6 +38,6 @@ public class AdminController {
 	@PutMapping("/password")
 	public ResponseEntity<CommonResponse<String>> updatePassword(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated UpdatePasswordRequest updatePasswordRequest) {
 		adminService.updatePassword(userDetails.getUsername(), updatePasswordRequest);
-		return ofDataWithHttpStatus("비밀번호 변경 완료", HttpStatus.OK);
+		return ofDataWithHttpStatus(null, HttpStatus.OK);
 	}
 }
