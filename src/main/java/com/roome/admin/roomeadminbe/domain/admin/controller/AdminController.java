@@ -30,7 +30,7 @@ public class AdminController {
 	}	
 
 	@PatchMapping
-	public ResponseEntity<CommonResponse<String>> updateInfo(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated UpdateAdminInfoRequest updateAdminInfoRequest) {
+	public ResponseEntity<CommonResponse<Void>> updateInfo(@AuthenticationPrincipal UserDetails userDetails, @RequestBody @Validated UpdateAdminInfoRequest updateAdminInfoRequest) {
 		adminService.updateInfo(userDetails.getUsername(), updateAdminInfoRequest);
 		return ofDataWithHttpStatus("사용자 정보 변경 완료", HttpStatus.OK);
 	}
