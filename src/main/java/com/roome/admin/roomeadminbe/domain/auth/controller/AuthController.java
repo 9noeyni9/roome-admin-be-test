@@ -31,11 +31,11 @@ public class AuthController {
     private final AuthService authService;
 
     // 임시 password 발급 요청
-    @PostMapping("/password")
-    public ResponseEntity<CommonResponse<String>> sendTempPassword(@RequestBody SendTempPasswordRequest sendTempPasswordRequest) {
-        authService.sendTempPassword(sendTempPasswordRequest);
-        return ofDataWithHttpStatus("임시 비밀번호 발급 완료", HttpStatus.OK);
-    }
+//    @PostMapping("/password")
+//    public ResponseEntity<CommonResponse<String>> sendTempPassword(@RequestBody SendTempPasswordRequest sendTempPasswordRequest) {
+//        authService.sendTempPassword(sendTempPasswordRequest);
+//        return ofDataWithHttpStatus("임시 비밀번호 발급 완료", HttpStatus.OK);
+//    }
 
     // 로그인
     @PostMapping("/login")
