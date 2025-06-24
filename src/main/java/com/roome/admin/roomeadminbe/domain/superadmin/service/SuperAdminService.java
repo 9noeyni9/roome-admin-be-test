@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
@@ -24,6 +25,8 @@ public class SuperAdminService {
 
 	private final MailService mailService;
 	private final AdminRepository adminRepository;
+	private final PasswordEncoder passwordEncoder;
+
 	public void inviteAdmin(InviteAdminRequest inviteAdminRequestDto) {
 
 		String tempPassword = generateRandomPassword();
@@ -34,9 +37,9 @@ public class SuperAdminService {
 				.adminEmail(inviteAdminRequestDto.getAdminEmail())
 				.phoneNumber(inviteAdminRequestDto.getPhoneNumber())
 				// 관리자 인증 전
-				.activationStatus(ActivationStatus.PENDING)
+				.activationStatus(ActivationStatus.INACTIVE)
 				// 최초 가입 전 비밀번호 null
-				.password(tempPassword)
+				.password(passwordEncoder.encode(tempPassword))
 				.deletedAt(null)
 				.isDeletedAt(false)
 				.lastLoginAt(null)
